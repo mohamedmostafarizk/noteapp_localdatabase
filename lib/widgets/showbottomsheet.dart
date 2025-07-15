@@ -9,59 +9,99 @@ class showbottomsheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(height: 16),
-            const Text(
-              "Add a new note",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  hintText: "Note title",
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: TextField(
-                maxLines: 8,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  hintText: "content",
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              height: 35,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(12),
-              ),
+      child: SingleChildScrollView(child: Addnewnote()),
+    );
+  }
+}
 
-              child: Center(
-                child: Text(
-                  'Add',
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+class Addnewnote extends StatefulWidget {
+  const Addnewnote({super.key, this.onsaved});
+
+  final void Function(String?)? onsaved;
+
+  @override
+  State<Addnewnote> createState() => _AddnewnoteState();
+}
+
+class _AddnewnoteState extends State<Addnewnote> {
+  final GlobalKey<FormState> globalKey = GlobalKey<FormState>();
+
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+
+  String? title, subtitle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: globalKey,
+      autovalidateMode: autovalidateMode,
+      child: Column(
+        children: [
+          const SizedBox(height: 16),
+          const Text(
+            "Add a new note",
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 16),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: TextFormField(
+              onSaved: widget.onsaved,
+              validator: (value) {
+                if (value?.isEmpty ?? true) {
+                  return "Title cannot be empty";
+                } else {
+                  return null;
+                }
+              },
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
                 ),
+                hintText: "Note title",
               ),
             ),
-            SizedBox(height: 16),
-          ],
-        ),
+          ),
+          const SizedBox(height: 16),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: TextFormField(
+              onSaved: widget.onsaved,
+              validator: (value) {
+                if (value?.isEmpty ?? true) {
+                  return "Title cannot be empty";
+                } else {
+                  return null;
+                }
+              },
+              maxLines: 8,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                hintText: "content",
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            height: 35,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(12),
+            ),
+
+            child: Center(
+              child: Text(
+                'Add',
+                style: TextStyle(color: Colors.black, fontSize: 18),
+              ),
+            ),
+          ),
+          SizedBox(height: 16),
+        ],
       ),
     );
   }
