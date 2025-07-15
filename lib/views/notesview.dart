@@ -1,8 +1,7 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, sort_child_properties_last
 
 import 'package:flutter/material.dart';
-import 'package:noteapp/views/NotesListview.dart';
-import 'package:noteapp/widgets/CustomAppBar.dart';
+import 'package:noteapp/views/Notesbody.dart';
 
 class Notesview extends StatelessWidget {
   const Notesview({super.key});
@@ -10,18 +9,12 @@ class Notesview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          children: [
-            SizedBox(height: 50),
-            CustomAppBar(),
-            SizedBox(height: 25),
-            Expanded(child: NotesListview()),
-          ],
-        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
+        backgroundColor: Colors.blue,
       ),
+      body: Notesbody(),
     );
   }
 }
-
