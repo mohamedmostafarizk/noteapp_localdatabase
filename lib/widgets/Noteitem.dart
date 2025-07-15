@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, deprecated_member_use
 
 import 'package:flutter/material.dart';
 
@@ -8,7 +8,7 @@ class Noteitem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 16, left: 12),
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
       decoration: BoxDecoration(
         color: Colors.orange[200],
         borderRadius: BorderRadius.circular(12),
@@ -25,7 +25,7 @@ class Noteitem extends StatelessWidget {
               ),
             ),
             subtitle: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16),
+              padding: const EdgeInsets.only(top: 32),
               child: Text(
                 'Learn how to build beautiful apps with Flutter',
                 style: TextStyle(
@@ -43,7 +43,7 @@ class Noteitem extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 200, bottom: 8),
+            padding: const EdgeInsets.only(left: 200, top: 10),
             child: Text(
               'may 10, 2023',
               style: TextStyle(
