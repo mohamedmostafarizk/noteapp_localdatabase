@@ -1,7 +1,8 @@
-// ignore_for_file: deprecated_member_use, sort_child_properties_last
+// ignore_for_file: deprecated_member_use, sort_child_properties_last, camel_case_types
 
 import 'package:flutter/material.dart';
 import 'package:noteapp/views/Notesbody.dart';
+import 'package:noteapp/widgets/showbottomsheet.dart';
 
 class Notesview extends StatelessWidget {
   const Notesview({super.key});
@@ -10,7 +11,14 @@ class Notesview extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return showbottomsheet();
+            },
+          );
+        },
         child: const Icon(Icons.add),
         backgroundColor: Colors.blue,
       ),
