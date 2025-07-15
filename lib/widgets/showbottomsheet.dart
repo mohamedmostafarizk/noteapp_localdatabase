@@ -84,19 +84,33 @@ class _AddnewnoteState extends State<Addnewnote> {
             ),
           ),
           const SizedBox(height: 16),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            height: 35,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(12),
-            ),
+          GestureDetector(
+            onTap: () {
+              if (globalKey.currentState!.validate()) {
+                globalKey.currentState!.save();
+                Navigator.pop(context);
+                // Here you can add the logic to save the note
+                // For example, you can call a function to save the note to a database
+              } else {
+                setState(() {
+                  autovalidateMode = AutovalidateMode.always;
+                });
+              }
+            },
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              height: 35,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(12),
+              ),
 
-            child: Center(
-              child: Text(
-                'Add',
-                style: TextStyle(color: Colors.black, fontSize: 18),
+              child: Center(
+                child: Text(
+                  'Add',
+                  style: TextStyle(color: Colors.black, fontSize: 18),
+                ),
               ),
             ),
           ),
