@@ -1,9 +1,10 @@
-// ignore_for_file: camel_case_types
+// ignore_for_file: camel_case_types, deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:noteapp/cubits/cubit/add_note_cubit.dart';
+import 'package:noteapp/models/notemodel.dart';
 
 class showbottomsheet extends StatelessWidget {
   const showbottomsheet({super.key});
@@ -34,9 +35,9 @@ class showbottomsheet extends StatelessWidget {
 }
 
 class Addnewnote extends StatefulWidget {
-  const Addnewnote({super.key, this.onsaved});
+  const Addnewnote({super.key}); //, this.onsaved});
 
-  final void Function(String?)? onsaved;
+  //final void Function(String?)? onsaved;
 
   @override
   State<Addnewnote> createState() => _AddnewnoteState();
@@ -65,7 +66,9 @@ class _AddnewnoteState extends State<Addnewnote> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: TextFormField(
-              onSaved: widget.onsaved,
+              onSaved: (value) {
+                title = value;
+              },
               validator: (value) {
                 if (value?.isEmpty ?? true) {
                   return "Title cannot be empty";
@@ -85,7 +88,9 @@ class _AddnewnoteState extends State<Addnewnote> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: TextFormField(
-              onSaved: widget.onsaved,
+              onSaved: (value) {
+                subtitle = value;
+              },
               validator: (value) {
                 if (value?.isEmpty ?? true) {
                   return "Title cannot be empty";
@@ -107,6 +112,13 @@ class _AddnewnoteState extends State<Addnewnote> {
             onTap: () {
               if (globalKey.currentState!.validate()) {
                 globalKey.currentState!.save();
+                var note = Notemodel(
+                  title: title!,
+                  subtitle: subtitle!,
+                  date: DateTime.now().toString(),
+                  color: Colors.blue.value,
+                );
+                BlocProvider.of<AddNoteCubit>(context).addNote(note);
                 Navigator.pop(context);
                 // Here you can add the logic to save the note
                 // For example, you can call a function to save the note to a database
