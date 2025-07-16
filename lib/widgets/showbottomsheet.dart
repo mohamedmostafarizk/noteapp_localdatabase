@@ -28,7 +28,12 @@ class showbottomsheet extends StatelessWidget {
           builder: (context, state) {
             return ModalProgressHUD(
               inAsyncCall: state is AddNoteLoading ? true : false,
-              child: SingleChildScrollView(child: Addnewnote()),
+              child: Padding(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                ),
+                child: SingleChildScrollView(child: Addnewnote()),
+              ),
             );
           },
         ),
