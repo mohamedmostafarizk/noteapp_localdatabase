@@ -1,6 +1,9 @@
 // ignore_for_file: camel_case_types
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:noteapp/cubits/cubit/add_note_cubit.dart';
 
 class showbottomsheet extends StatelessWidget {
   const showbottomsheet({super.key});
@@ -9,7 +12,25 @@ class showbottomsheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-      child: SingleChildScrollView(child: Addnewnote()),
+      child: SingleChildScrollView(
+        child: BlocConsumer<AddNoteCubit, AddNoteState>(
+          listener: (context, state) {
+            if (state is AddNoteSuccess) {
+              Navigator.pop(context);
+            } else if (state is AddNoteFailure) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text("Error: ${state.errmessage}")),
+              );
+            }
+          },
+          builder: (context, state) {
+            return ModalProgressHUD(
+              inAsyncCall: state is AddNoteLoading ? true : false,
+              child: Addnewnote(),
+            );
+          },
+        ),
+      ),
     );
   }
 }
