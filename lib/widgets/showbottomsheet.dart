@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:noteapp/cubits/AddNote_cubit/add_note_cubit.dart';
+import 'package:noteapp/cubits/Notecubit/cubit/note_cubit_cubit.dart';
 import 'package:noteapp/models/notemodel.dart';
 
 class showbottomsheet extends StatelessWidget {
@@ -22,7 +23,7 @@ class showbottomsheet extends StatelessWidget {
               ScaffoldMessenger.of(
                 context,
               ).showSnackBar(SnackBar(content: Text("Done")));
-              //Navigator.pop(context);
+              BlocProvider.of<NoteCubitCubit>(context).fetchNotes();
             } else if (state is AddNoteFailure) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text("Error: ${state.errmessage}")),

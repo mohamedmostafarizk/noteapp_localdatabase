@@ -11,10 +11,9 @@ class NotesListview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Notemodel> notes = BlocProvider.of<NoteCubitCubit>(context).notes!;
-
     return BlocBuilder<NoteCubitCubit, NoteCubitState>(
       builder: (context, state) {
+        List<Notemodel> notes = BlocProvider.of<NoteCubitCubit>(context).notes!;
         return state is NoteCubitSuccess
             ? ListView.builder(
                 itemCount: notes.length,
